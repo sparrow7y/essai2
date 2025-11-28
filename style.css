@@ -1,0 +1,242 @@
+/* --- Caribbean Pirates Style for Overview --- */
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+body {
+  font-family: 'Pirata One', 'Cinzel Decorative', 'Georgia', serif;
+  background-image: url('coffe_paper.png') center center/cover no-repeat fixed, #18120c;
+  color: #3a2d1a;
+}
+
+main {
+  background: rgba(20, 15, 8, 0.97);
+  border-radius: 18px;
+  box-shadow: 0 0 32px 10px #000c, 0 0 0 8px #18120c inset;
+  border: 8px solid #7a5a2f;
+  border-image: url('https://i.imgur.com/6QKQ4Qp.png') 30 round;
+  font-size: 1.25em;
+  color: #3a2d1a;
+  position: relative;
+}
+
+section h2 {
+  font-family: 'Pirata One', 'Cinzel Decorative', 'Georgia', serif;
+  color: #5a4320;
+  border-bottom: 2px dashed #7a5a2f;
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+
+section p, .profile-info p, .cv-list li, .portfolio-list li {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #3a2d1a;
+}
+
+.cv-list strong {
+  color: #5a4320;
+}
+
+.portfolio-list li {
+  border-left: 4px solid #7a5a2f;
+  background: #18120c;
+  border-radius: 8px;
+  color: #3a2d1a;
+  box-shadow: 0 2px 12px #000c;
+}
+
+nav a {
+  color: #5a4320;
+  text-decoration: underline wavy #7a5a2f;
+}
+nav a:hover {
+  color: #7a5a2f;
+}
+/* Portfolio & CV Website Styles */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('coffe_paper.png') center center/cover no-repeat fixed, #f4f7fa;
+  color: #222;
+}
+header {
+  background: #2d3e50;
+  color: #fff;
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+}
+header h1 {
+  margin: 0.2em 0 0.1em 0;
+  font-size: 2.5em;
+}
+header p {
+  margin: 0;
+  font-size: 1.2em;
+  color: #b0c4d8;
+}
+nav {
+  margin: 1.5em 0 1em 0;
+  text-align: center;
+}
+nav a {
+  color: #2d3e50;
+  text-decoration: none;
+  margin: 0 1.5em;
+  font-weight: 500;
+  font-size: 1.1em;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #1abc9c;
+}
+main {
+  max-width: 900px;
+  margin: 2em auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+  padding: 2em 2.5em;
+}
+section {
+  margin-bottom: 2.5em;
+}
+section h2 {
+  color: #1abc9c;
+  border-bottom: 2px solid #e0e4ea;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #1abc9c;
+}
+.profile-info {
+  flex: 1;
+}
+.cv-list, .portfolio-list {
+  list-style: none;
+  padding: 0;
+}
+.cv-list li, .portfolio-list li {
+  margin-bottom: 1em;
+}
+.cv-list strong {
+  color: #2d3e50;
+}
+.portfolio-list li {
+  border-left: 4px solid #1abc9c;
+  padding-left: 1em;
+  background: #f8fafd;
+  border-radius: 4px;
+}
+footer {
+  text-align: center;
+  color: #888;
+  padding: 1.5em 0 1em 0;
+  font-size: 1em;
+  background: none;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 1em 0.5em;
+  }
+  .profile {
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+/* Login Page Styles */
+.login-box {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 5px solid #7a5a2f;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #2d3e50;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+.creating-account-box {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 5px solid #7a5a2f;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.create-account-link {
+    margin-bottom: 15px;
+}
+.create-account-link a {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.creating-account-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.create-account-link {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+.main-content {
+  background: rgba(20, 15, 8, 0.97);
+  border-radius: 18px;
+  box-shadow: 0 0 32px 10px #000c, 0 0 0 8px #18120c inset;
+  border: 8px solid #7a5a2f;
+  border-image: url('https://i.imgur.com/6QKQ4Qp.png') 30 round;
+  font-size: 1.25em;
+  color: #3a2d1a;
+  position: relative;
+}
