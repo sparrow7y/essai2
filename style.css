@@ -162,8 +162,8 @@ body {
     cursor: pointer;
     font-size: 18px;
     padding: 4px 8px;
-    opacity: 0;
-    transition: opacity 0.9s;
+    ;
+    
 }
 
 .task-item:hover .task-delete {
