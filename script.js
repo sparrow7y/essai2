@@ -88,6 +88,17 @@ if (editor && preview && typeof marked !== 'undefined') {
     console.warn('marked.js non disponible — aperçu markdown désactivé');
 }
 
+function initPatternItem(item) {
+    const text = item.querySelector('.pattern-text');
+    const deleteBtn = item.querySelector('.pattern-delete');
+
+     // Focus sur le champ de texte et sélectionner le texte
+    const input = newItem.querySelector('.pattern-text');
+    input.focus();
+    input.select();
+}
+
+    
 // Gestion des paternes (utilise délégation et supporte suppression)
 const patternList = document.querySelector('.pattern-list');
 if (patternList) {
@@ -104,7 +115,7 @@ if (patternList) {
         // Si pas de bouton de suppression, en ajouter un
         if (!item.querySelector('.pattern-delete')) {
             // Retirer l'ancien texte pour éviter duplication si innerHTML est utilisé
-            const nameOnly = text.replace(/\u00D7|×|\u2215|🗑️/g, '').trim();
+            const nameOnly = text.replace(/\u0078|×|\u2215|🗑️/g, '').trim();
             item.innerHTML = `${nameOnly} <button class="pattern-delete" title="Supprimer">🗑️</button>`;
         }
     });
