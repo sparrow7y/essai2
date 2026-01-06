@@ -87,6 +87,8 @@ body {
     font-weight: 600;
     margin-bottom: 20px;
     color: #333;
+    border: none;
+    list-style: none;
 }
 
 .task-list {
@@ -193,6 +195,36 @@ body {
     border-color: #999;
     color: #333;
 }
+.save-container {
+    position: relative;
+    bottom: 20px;
+    width: calc(100% - 35px);
+    background: white;
+    padding: 10px 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.save-btn {
+    position: relative;
+    bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 12px 20px;
+    background: #2d3e50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 1500;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.2s, box-shadow 0.2s;
+}
 
 /* Panneau latéral droit */
 .sidebar {
@@ -217,7 +249,8 @@ body {
 .pattern-item {
     padding: 12px 15px;
     margin: 5px 0;
-    background: #f8f8f8;
+    background: transparent;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.2s;
@@ -229,14 +262,28 @@ body {
 
 .pattern-text {
     flex: 1;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
     border: none;
+    background: transparent;
+    cursor: text;
+}
+
+.pattern-edit-input {
+    width: calc(100% - 48px);
+    font-size: inherit;
+    border: none;
+    padding: 6px 8px;
+    background: transparent;
+    border-radius: 6px;
+    cursor: text;
+    transition: background 0.2s;
+
 }
 
 .pattern-item.active {
     background: #e3f2fd;
-    border-left: 3px solid  #2d3e50;
+    border-left: 3px none  #2d3e50;
 }
 
 .add-pattern-btn {

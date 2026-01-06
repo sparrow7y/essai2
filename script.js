@@ -89,14 +89,79 @@ if (editor && preview && typeof marked !== 'undefined') {
 }
 
 function initPatternItem(item) {
-    const text = item.querySelector('.pattern-text');
+    const textSpan = item.querySelector('.pattern-text');
     const deleteBtn = item.querySelector('.pattern-delete');
 
-     // Focus sur le champ de texte et sélectionner le texte
-    const input = newItem.querySelector('.pattern-text');
-    input.focus();
-    input.select();
-}
+    function enableEditingOnSpan(span) {
+        span.addEventListener('click', (e) => {
+            const previousKey = item.dataset.pattern;
+            // ensure this paterne is selected when starting edit
+            document.querySelectorAll('.pattern-item').forEach(p => p.classList.remove('active'));
+            item.classList.add('active');
+            const current = span.textContent.trim();
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'pattern-edit-input';
+            input.value = current;
+            span.replaceWith(input);
+            input.focus();
+            input.select();
+
+            function finish(save) {
+                const newValue = save ? input.value.trim() : current;
+                const newSpan = document.createElement('span');
+                newSpan.className = 'pattern-text';
+                newSpan.textContent = newValue || current;
+                input.replaceWith(newSpan);
+                // Update dataset key if saved
+                if (save && newValue) {
+                    const key = normalizeName(newValue);
+                    item.dataset.pattern = key;
+
+                    // Update associated tab if present
+                    const oldKey = previousKey;
+                    const tab = document.querySelector(`.tab[data-tab="${oldKey}"]`);
+                    if (tab) {
+                        const newKey = key;
+                        tab.dataset.tab = newKey;
+                        // Replace display while preserving close button
+                        tab.innerHTML = `${newValue} <span class="tab-close">×</span>`;
+                        // Reattach close handler
+                        const closeBtn = tab.querySelector('.tab-close');
+                        if (closeBtn) {
+                            closeBtn.addEventListener('click', (ev) => {
+                                ev.stopPropagation();
+                                if (confirm('Fermer cet onglet ?')) {
+                                    tab.remove();
+                                }
+                            });
+                        }
+                    }
+                }
+
+                // Re-enable editing on the new span
+                enableEditingOnSpan(newSpan);
+            }
+
+            input.addEventListener('blur', () => finish(true));
+            input.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Enter') finish(true);
+                if (ev.key === 'Escape') finish(false);
+            });
+        });
+    }
+
+    if (textSpan) enableEditingOnSpan(textSpan);
+
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm('Supprimer ce paterne ?')) {
+                item.remove();
+            }
+        });
+    }
+} 
 
     
 // Gestion des paternes (utilise délégation et supporte suppression)
@@ -116,8 +181,10 @@ if (patternList) {
         if (!item.querySelector('.pattern-delete')) {
             // Retirer l'ancien texte pour éviter duplication si innerHTML est utilisé
             const nameOnly = text.replace(/\u0078|×|\u2215|🗑️/g, '').trim();
-            item.innerHTML = `${nameOnly} <button class="pattern-delete" title="Supprimer">🗑️</button>`;
+            item.innerHTML = `<span class="pattern-text">${nameOnly}</span> <button class="pattern-delete" title="Supprimer">🗑️</button>`;
         }
+        // Attach editing and delete handlers
+        initPatternItem(item);
     });
     // Délégation : clic sur un élément de la liste
     patternList.addEventListener('click', (e) => {
@@ -148,8 +215,10 @@ if (patternList) {
                 newPattern.className = 'pattern-item';
                 const key = normalizeName(patternName);
                 newPattern.dataset.pattern = key;
-                newPattern.innerHTML = `${patternName} <button class="pattern-delete" title="Supprimer">🗑️</button>`;
+                newPattern.innerHTML = `<span class="pattern-text">${patternName}</span> <button class="pattern-delete" title="Supprimer">🗑️</button>`;
                 patternList.appendChild(newPattern);
+                // Initialiser handlers
+                initPatternItem(newPattern);
                 // Sélectionner le nouveau paterne
                 document.querySelectorAll('.pattern-item').forEach(p => p.classList.remove('active'));
                 newPattern.classList.add('active');
@@ -191,8 +260,9 @@ if (patternList) {
                 targetPattern = document.createElement('li');
                 targetPattern.className = 'pattern-item';
                 targetPattern.dataset.pattern = key;
-                targetPattern.innerHTML = `${tabName} <button class="pattern-delete" title="Supprimer">🗑️</button>`;
+                targetPattern.innerHTML = `<span class="pattern-text">${tabName}</span> <button class="pattern-delete" title="Supprimer">🗑️</button>`;
                 patternList.appendChild(targetPattern);
+                initPatternItem(targetPattern);
             }
             document.querySelectorAll('.pattern-item').forEach(p => p.classList.remove('active'));
             targetPattern.classList.add('active');
@@ -220,6 +290,7 @@ document.querySelector('.tab-add').addEventListener('click', () => {
         const addBtn = document.querySelector('.tab-add');
         const newTab = document.createElement('button');
         newTab.className = 'tab';
+        newTab.dataset.tab = normalizeName(tabName);
         newTab.innerHTML = `${tabName} <span class="tab-close">×</span>`;
         tabs.insertBefore(newTab, addBtn);
         
@@ -232,4 +303,8 @@ document.querySelector('.tab-add').addEventListener('click', () => {
             }
         });
     }
+});
+
+document.querySelector('.save-btn').addEventListener('click', () => {
+    alert('Fonction de sauvegarde non implémentée.');
 });

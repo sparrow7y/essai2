@@ -9,6 +9,7 @@
     
 </head>
 <body>
+<div class="pattern">    
     <div class="container">
         <!-- Section principale -->
         <div class="main-section">
@@ -24,7 +25,9 @@
             <div class="content">
                 <!-- Catégorie Nourriture -->
                 <div class="category">
-                    <h2 class="category-title">nourriture</h2>
+                    <h2 >
+                        <input type="text" class="category-title" value="Nourriture">
+                    </h2>
                     <ul class="task-list" id="nourriture-list">
                         <li class="task-item">
                             <div class="task-checkbox"></div>
@@ -34,10 +37,11 @@
                         </li>
                     </ul>
                 </div>
-
                 <!-- Catégorie Vêtements -->
                 <div class="category">
-                    <h2 class="category-title">vêtements</h2>
+                    <h2 >
+                        <input type="text" class="category-title" value="Vêtements">
+                    </h2>
                     <ul class="task-list" id="vetements-list">
                         <li class="task-item">
                             <div class="task-checkbox"></div>
@@ -45,49 +49,31 @@
                             <button class="task-delete">🗑️</button>
                             <button class="add-task-btn">+ Ajouter une tâche</button>
                         </li>
-                    
-                    
                     </ul>
                 </div>
             </div>
+            <div class="Save-container">
+                <button class="save-btn">Sauvegarder</button>
+            </div>
         </div>
-<!-- adapter le pattern comme les tasks -->
+
         <!-- Panneau latéral -->
-        <div class="sidebar">
+         <div class="sidebar">
             <div class="sidebar-header">
                 <h3>Paternes</h3>
             </div>
             <ul class="pattern-list">
-                <li class="pattern-item active">
-                    <input type="text" class="task-text" value="paterne 1">
-                    <button class="pattern-delete">🗑️</button>    
-                </li>
-                
-                <li class="pattern-item">
-                    <input type="text" class="task-text" value="paterne 2">
-                    <button class="pattern-delete">🗑️</button>
-                </li>
+                <h4>
+                    <li class="pattern-item active">paterne 1</li>
+                    <li class="pattern-item">paterne 2</li>
+                </h4>
             </ul>
-            <button class="add-pattern-btn">add paterne</button>
-        
-            <!-- Section Markdown 
-            <div class="markdown-section">
-                <h3 class="markdown-title">markdown</h3>
-                <textarea class="markdown-editor" placeholder="Écrivez votre markdown ici...
-# Titre
-## Sous-titre
-- Liste à puces
-**Gras** *Italique*">## Notes
-- Tâche 1
-- Tâche 2
+            <button class="add-pattern-btn">Ajouter paterne</button>
+        </div> 
 
-### Important
-N'oubliez pas de vérifier les **courses** demain.</textarea>
-                <div class="markdown-preview"></div>
-            </div>
-        </div>
-    </div>
--->
+    </div>  
+
+</div>
     <script src="script.js"></script>
 </body>
 </html>
