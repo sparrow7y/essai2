@@ -30,7 +30,9 @@ function initTaskItem(item) {
         deleteBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             if (confirm('Supprimer cette tâche ?')) {
-                item.remove();
+                // Ajouter animation puis supprimer l'élément au terme de l'animation
+                item.classList.add('task-removing');
+                item.addEventListener('animationend', () => item.remove(), { once: true });
             }
         });
     }
@@ -307,4 +309,97 @@ document.querySelector('.tab-add').addEventListener('click', () => {
 
 document.querySelector('.save-btn').addEventListener('click', () => {
     alert('Fonction de sauvegarde non implémentée.');
+});
+
+// Gestion des catégories : helper pour initialiser une catégorie (supprimer + comportement interne)
+function initCategory(category) {
+    // Wrap header if needed
+    let header = category.querySelector('.category-header');
+    const existingH2 = category.querySelector('h2');
+    if (!header) {
+        header = document.createElement('div');
+        header.className = 'category-header';
+        if (existingH2) {
+            header.appendChild(existingH2);
+        } else {
+            const h2 = document.createElement('h2');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'category-title';
+            input.value = '';
+            h2.appendChild(input);
+            header.appendChild(h2);
+        }
+        category.insertBefore(header, category.firstChild);
+    }
+
+    // Ensure there's a delete button and attach handler (avoid double-binding)
+    let delBtn = category.querySelector('.category-delete');
+    if (!delBtn) {
+        delBtn = document.createElement('button');
+        delBtn.className = 'category-delete';
+        delBtn.title = 'Supprimer la catégorie';
+        delBtn.textContent = '❌';
+        header.appendChild(delBtn);
+    }
+    // Attach handler if not already attached
+    if (!delBtn.dataset.inited) {
+        delBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm('Supprimer cette catégorie ?')) {
+                // animate removal then remove
+                category.classList.add('category-removing');
+                category.addEventListener('animationend', () => category.remove(), { once: true });
+            }
+        });
+        delBtn.dataset.inited = '1';
+    }
+
+    // Init tasks inside category
+    category.querySelectorAll('.task-item').forEach(initTaskItem);
+}
+
+// Initialize categories that already exist
+document.querySelectorAll('.category').forEach(initCategory);
+
+// Gestion de l'ajout de catégorie
+document.querySelector('.add-category-btn').addEventListener('click', () => {
+    const categoryName = prompt('Nom de la nouvelle catégorie:');
+    if (categoryName) {
+        const addWrapper = document.querySelector('.add-category');
+        const newCategory = document.createElement('div');
+        newCategory.className = 'category category-add';
+        newCategory.innerHTML = `
+            <div class="category-header">
+                <h2><input type="text" class="category-title" value="${categoryName}"></h2>
+                <button class="category-delete" title="Supprimer la catégorie">❌</button>
+            </div>
+            <ul class="task-list">
+                <li class="task-item">
+                    <div class="task-checkbox"></div>
+                    <input type="text" class="task-text" value="Nouvelle tâche" placeholder="Entrez une tâche...">
+                    <button class="task-delete">🗑️</button>
+                    <button class="add-task-btn"> + Ajouter une tâche</button>
+                </li>
+            </ul>
+        `;
+
+        // Insert before the add button so it appears above it
+        if (addWrapper && addWrapper.parentNode) {
+            addWrapper.parentNode.insertBefore(newCategory, addWrapper);
+        } else {
+            const container = document.querySelector('.content') || document.body;
+            container.appendChild(newCategory);
+        }
+
+        // Initialize the new category (attach delete handler, etc.)
+        initCategory(newCategory);
+
+        // Focus on the first task input
+        const firstInput = newCategory.querySelector('.task-text');
+        if (firstInput) {
+            firstInput.focus();
+            firstInput.select();
+        }
+    }
 });

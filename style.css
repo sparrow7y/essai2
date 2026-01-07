@@ -80,6 +80,48 @@ body {
 
 .category {
     margin-bottom: 40px;
+    transition: transform 0.25s, opacity 0.25s;
+}
+
+/* Header layout and delete button */
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.category-header h2 { margin: 0; }
+
+.category-delete {
+    background: transparent;
+   
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 6px 8px;
+}
+.category-delete:hover {
+    background: #ffebee;
+    border-radius: 6px;
+    
+}
+
+/* Animation for adding/removing category */
+.category-add {
+    animation: categoryEnter .35s ease forwards;
+    transform-origin: top;
+}
+@keyframes categoryEnter {
+    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.category-removing {
+    animation: categoryExit .2s ease forwards;
+}
+@keyframes categoryExit {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-6px) scale(0.98); }
 }
 
 .category-title {
@@ -108,6 +150,16 @@ body {
     background: #fafafa;
     padding-left: 10px;
     margin-left: -10px;
+}
+
+/* Animation de suppression pour les tâches */
+.task-removing {
+    animation: taskExit .18s ease forwards;
+    will-change: opacity, transform;
+}
+@keyframes taskExit {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 0; transform: translateY(-6px) scale(0.98); }
 }
 
 .task-checkbox {
@@ -231,7 +283,7 @@ body {
     background: #f5f5f5;
     border: 1px dashed #ccc;
     border-radius: 6px;
-    cursor: grab;
+    cursor: pointer;
     color: #666;
     font-size: 14px;
     width: 100%;
@@ -284,6 +336,7 @@ body {
 .pattern-edit-input {
     width: calc(100% - 48px);
     font-size: inherit;
+    color: #e8e8e8;
     border: none;
     padding: 6px 8px;
     background: transparent;
@@ -293,9 +346,14 @@ body {
 
 }
 
+.pattern-edit-input:focus {
+  outline: none;
+  background: #2d3e50;
+}
+
 .pattern-item.active {
     background: #e3f2fd;
-    border-left: 3px none  #2d3e50;
+    border-left: 3px solid #2d3e50;
 }
 
 .add-pattern-btn {
