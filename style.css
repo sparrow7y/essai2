@@ -225,6 +225,18 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: background 0.2s, box-shadow 0.2s;
 }
+.add-category-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    cursor: grab;
+    color: #666;
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.2s;
+}
 
 /* Panneau latéral droit */
 .sidebar {
